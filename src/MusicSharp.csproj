@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="SharpAudio.ALBinding" Version="1.0.22-beta" />
+    <PackageReference Include="SharpAudio.Codec" Version="1.0.22-beta" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

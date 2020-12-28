@@ -15,9 +15,7 @@ public static class Program
     public static void Main()
     {
         // Start MusicSharp.
-        IPlayer player = new WinPlayer();
-
-        Tui gui = new Tui(player);
-        gui.Start();
+        Launcher launcher = new Launcher();
+        launcher.StartMusicSharp();
     }
 }
