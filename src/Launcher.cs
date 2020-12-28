@@ -13,43 +13,25 @@ namespace MusicSharp
     public class Launcher
     {
         /// <summary>
-        /// Returns the OS Platform the user is running on.
-        /// </summary>
-        /// <returns>The user's OS Platform.</returns>
-        public static OSPlatform GetOperatingSystem()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                return OSPlatform.OSX;
-            }
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                return OSPlatform.Linux;
-            }
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                return OSPlatform.Windows;
-            }
-
-            throw new Exception("Cannot determine operating system!");
-        }
-
-        /// <summary>
         /// Start MusicSharp with the platform specific player implentation.
         /// </summary>
         public void StartMusicSharp()
         {
-            if (GetOperatingSystem() == OSPlatform.Windows)
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 IPlayer player = new WinPlayer();
 
                 Tui gui = new Tui(player);
                 gui.Start();
             }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                IPlayer player = new MusicPlayer();
 
-            if (GetOperatingSystem() == OSPlatform.Linux)
+                Tui gui = new Tui(player);
+                gui.Start();
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 IPlayer player = new MusicPlayer();
 
@@ -57,17 +39,7 @@ namespace MusicSharp
                 gui.Start();
             }
 
-            if (GetOperatingSystem() == OSPlatform.OSX)
-            {
-                IPlayer player = new MusicPlayer();
-
-                Tui gui = new Tui(player);
-                gui.Start();
-            }
-            else
-            {
-                Console.WriteLine("Error: Unable to determine operating system version.");
-            }
+            throw new Exception("Cannot determine operating system!");
         }
     }
 }
